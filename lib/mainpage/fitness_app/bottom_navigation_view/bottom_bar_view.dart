@@ -253,9 +253,13 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                           parent: widget.tabIconData!.animationController!,
                           curve:
                               Interval(0.1, 1.0, curve: Curves.fastOutSlowIn))),
-                  child: Image.asset(widget.tabIconData!.isSelected
-                      ? widget.tabIconData!.selectedImagePath
-                      : widget.tabIconData!.imagePath),
+                  child: Icon(
+                    widget.tabIconData!.isSelected
+                        ? widget.tabIconData!.selectedIconData
+                        : widget.tabIconData!.iconData,
+                    color: FitnessAppTheme.nearlyDarkBlue,
+                    size: 24.0,
+                  )
                 ),
                 Positioned(
                   top: 4,

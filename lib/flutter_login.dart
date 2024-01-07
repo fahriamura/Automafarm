@@ -1,10 +1,13 @@
+import 'package:autofarm/mainpage/fitness_app/fitness_app_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:autofarm/mainpage/home_screen.dart';
 
+import 'mainpage/navigation_home_screen.dart';
+
 const users = {
-  'dribbble@gmail.com': '12345',
+  'a@gmail.com': '123',
   'hunter@gmail.com': 'hunter',
 };
 
@@ -77,28 +80,10 @@ class LoginScreen extends StatelessWidget {
             return null;
           },
         ),
-        LoginProvider(
-          icon: FontAwesomeIcons.linkedinIn,
-          callback: () async {
-            debugPrint('start linkdin sign in');
-            await Future.delayed(loginTime);
-            debugPrint('stop linkdin sign in');
-            return null;
-          },
-        ),
-        LoginProvider(
-          icon: FontAwesomeIcons.githubAlt,
-          callback: () async {
-            debugPrint('start github sign in');
-            await Future.delayed(loginTime);
-            debugPrint('stop github sign in');
-            return null;
-          },
-        ),
       ],
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => MyHomePage(),
+          builder: (context) => FitnessAppHomeScreen(),
         ));
       },
       onRecoverPassword: _recoverPassword,
