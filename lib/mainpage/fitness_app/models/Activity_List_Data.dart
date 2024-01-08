@@ -1,5 +1,5 @@
-class MealsListData {
-  MealsListData({
+class ActicityListData {
+  ActicityListData({
 
     this.titleTxt = '',
     this.startColor = '',
@@ -22,8 +22,8 @@ class MealsListData {
     return total;
   }
 
-  static List<MealsListData> tabIconsList = <MealsListData>[
-    MealsListData(
+  static List<ActicityListData> tabIconsList = <ActicityListData>[
+    ActicityListData(
 
       titleTxt: 'Breakfast',
       kacl: 525,
