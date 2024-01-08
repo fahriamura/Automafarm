@@ -149,7 +149,7 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                                         padding:
                                             const EdgeInsets.only(left: 4.0),
                                         child: Text(
-                                          'Last drink 8:26 AM',
+                                          'Last watering 8:26 AM',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontFamily:
@@ -175,12 +175,11 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                                         SizedBox(
                                           width: 24,
                                           height: 24,
-                                          child: Image.asset(
-                                              'assets/fitness_app/bell.png'),
+
                                         ),
                                         Flexible(
                                           child: Text(
-                                            'Your bottle is empty, refill it!.',
+                                            'Your water is empty, refill it!.',
                                             textAlign: TextAlign.start,
                                             style: TextStyle(
                                               fontFamily:

@@ -101,22 +101,30 @@ class ActivityView extends StatelessWidget {
           opacity: animation!,
           child: Transform(
             transform: Matrix4.translationValues(
-                100 * (1.0 - animation!.value), 0.0, 0.0),
+              100 * (1.0 - animation!.value),
+              0.0,
+              0.0,
+            ),
             child: SizedBox(
               width: 130,
               child: Stack(
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(
-                        top: 32, left: 8, right: 8, bottom: 16),
+                      top: 32,
+                      left: 8,
+                      right: 8,
+                      bottom: 16,
+                    ),
                     child: Container(
                       decoration: BoxDecoration(
                         boxShadow: <BoxShadow>[
                           BoxShadow(
-                              color: HexColor(activityListData!.endColor)
-                                  .withOpacity(0.6),
-                              offset: const Offset(1.1, 4.0),
-                              blurRadius: 8.0),
+                            color: HexColor(activityListData!.endColor)
+                                .withOpacity(0.6),
+                            offset: const Offset(1.1, 4.0),
+                            blurRadius: 8.0,
+                          ),
                         ],
                         gradient: LinearGradient(
                           colors: <HexColor>[
@@ -135,112 +143,21 @@ class ActivityView extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.only(
-                            top: 54, left: 16, right: 16, bottom: 8),
+                          top: 54,
+                          left: 16,
+                          right: 16,
+                          bottom: 8,
+                        ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
-                              activityListData!.titleTxt,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: FitnessAppTheme.fontName,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                letterSpacing: 0.2,
-                                color: FitnessAppTheme.white,
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                const EdgeInsets.only(top: 8, bottom: 8),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      activityListData!.Time,
-                                      style: TextStyle(
-                                        fontFamily: FitnessAppTheme.fontName,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 10,
-                                        letterSpacing: 0.2,
-                                        color: FitnessAppTheme.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            activityListData?.gram != 0
-                                ? Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: <Widget>[
-                                Text(
-                                  activityListData!.gram.toString(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontFamily: FitnessAppTheme.fontName,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 24,
-                                    letterSpacing: 0.2,
-                                    color: FitnessAppTheme.white,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 4, bottom: 3),
-                                  child: Text(
-                                    'kcal',
-                                    style: TextStyle(
-                                      fontFamily:
-                                      FitnessAppTheme.fontName,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 10,
-                                      letterSpacing: 0.2,
-                                      color: FitnessAppTheme.white,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                                : Container(
-                              decoration: BoxDecoration(
-                                color: FitnessAppTheme.nearlyWhite,
-                                shape: BoxShape.circle,
-                                boxShadow: <BoxShadow>[
-                                  BoxShadow(
-                                      color: FitnessAppTheme.nearlyBlack
-                                          .withOpacity(0.4),
-                                      offset: Offset(8.0, 8.0),
-                                      blurRadius: 8.0),
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: Icon(
-                                  Icons.add,
-                                  color: HexColor(activityListData!.endColor),
-                                  size: 24,
-                                ),
-                              ),
-                            ),
+                            if (activityListData?.gram != 0)
+                              ..._buildGramContent()
+                            else
+                              ..._buildLiterContent(),
                           ],
                         ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    child: Container(
-                      width: 84,
-                      height: 84,
-                      decoration: BoxDecoration(
-                        color: FitnessAppTheme.nearlyWhite.withOpacity(0.2),
-                        shape: BoxShape.circle,
                       ),
                     ),
                   ),
@@ -251,5 +168,134 @@ class ActivityView extends StatelessWidget {
         );
       },
     );
+  }
+
+  List<Widget> _buildGramContent() {
+    return [
+      Column(
+        children: <Widget>[
+          Text(
+            activityListData!.titleTxt,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: FitnessAppTheme.fontName,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              letterSpacing: 0.2,
+              color: FitnessAppTheme.white,
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    activityListData!.Time,
+                    style: TextStyle(
+                      fontFamily: FitnessAppTheme.fontName,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 10,
+                      letterSpacing: 0.2,
+                      color: FitnessAppTheme.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Text(
+                "${activityListData!.gram.toString()} Gram",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: FitnessAppTheme.fontName,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 24,
+                  letterSpacing: 0.2,
+                  color: FitnessAppTheme.white,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 4, bottom: 3),
+                child: Text(
+                  'kcal',
+                  style: TextStyle(
+                    fontFamily: FitnessAppTheme.fontName,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 10,
+                    letterSpacing: 0.2,
+                    color: FitnessAppTheme.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ];
+  }
+
+  List<Widget> _buildLiterContent() {
+    return [
+      Column(
+        children: <Widget>[
+          Text(
+            activityListData!.titleTxt,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: FitnessAppTheme.fontName,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              letterSpacing: 0.2,
+              color: FitnessAppTheme.white,
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    activityListData!.Time,
+                    style: TextStyle(
+                      fontFamily: FitnessAppTheme.fontName,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 10,
+                      letterSpacing: 0.2,
+                      color: FitnessAppTheme.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Text(
+                "${activityListData!.liter.toString()} Liter",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: FitnessAppTheme.fontName,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 24,
+                  letterSpacing: 0.2,
+                  color: FitnessAppTheme.white,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ];
   }
 }
