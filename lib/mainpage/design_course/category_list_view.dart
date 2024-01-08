@@ -1,6 +1,6 @@
 import 'package:autofarm/mainpage/design_course/design_course_app_theme.dart';
 import 'package:autofarm/mainpage/design_course/models/category.dart';
-import 'package:autofarm/mainpage/main.dart';
+import 'package:autofarm/mainpage/GetColor.dart';
 import 'package:flutter/material.dart';
 
 class CategoryListView extends StatefulWidget {

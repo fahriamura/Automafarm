@@ -1,7 +1,7 @@
-import 'package:autofarm/mainpage/main.dart';
+import 'package:autofarm/mainpage/GetColor.dart';
 import 'package:flutter/material.dart';
 
-import '../fitness_app_theme.dart';
+import '../HomeScreenTheme.dart';
 
 class GlassView extends StatelessWidget {
   final AnimationController? animationController;

@@ -1,10 +1,8 @@
-import 'package:autofarm/mainpage/fitness_app/fitness_app_home_screen.dart';
+import 'package:autofarm/mainpage/fitness_app/MainHomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:autofarm/mainpage/home_screen.dart';
 
-import 'mainpage/navigation_home_screen.dart';
 
 const users = {
   'a@gmail.com': '123',
@@ -83,7 +81,7 @@ class LoginScreen extends StatelessWidget {
       ],
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => FitnessAppHomeScreen(),
+          builder: (context) => MainHomeScreen(),
         ));
       },
       onRecoverPassword: _recoverPassword,

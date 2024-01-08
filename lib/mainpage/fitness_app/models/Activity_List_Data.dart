@@ -1,33 +1,44 @@
-class ActicityListData {
-  ActicityListData({
+class ActivityListData {
+  ActivityListData({
 
     this.titleTxt = '',
     this.startColor = '',
     this.endColor = '',
-    this.meals,
-    this.kacl = 0,
+    this.Time='',
+    this.gram = 0,
+    this.liter=0,
   });
 
 
   String titleTxt;
   String startColor;
   String endColor;
-  List<String>? meals;
-  int kacl;
-  static int getTotalKacl() {
+  String Time;
+  int gram;
+  int liter;
+  static int getTotalGram() {
     int total = 0;
     for (var item in tabIconsList) {
-      total += item.kacl;
+      total += item.gram;
     }
     return total;
   }
 
-  static List<ActicityListData> tabIconsList = <ActicityListData>[
-    ActicityListData(
+  static int getTotalLiter(){
+    int total = 0;
+    for (var item in tabIconsList) {
+      total += item.liter;
+    }
+    return total;
 
-      titleTxt: 'Breakfast',
-      kacl: 525,
-      meals: <String>['Bread,', 'Peanut butter,', 'Apple'],
+  }
+
+  static List<ActivityListData> tabIconsList = <ActivityListData>[
+    ActivityListData(
+
+      titleTxt: 'Feeding',
+      gram: 525,
+      Time:"8.30",
       startColor: '#FA7D82',
       endColor: '#FFB295',
     ),

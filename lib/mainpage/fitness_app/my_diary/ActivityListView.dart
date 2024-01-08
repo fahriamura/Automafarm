@@ -1,12 +1,12 @@
-import 'package:autofarm/mainpage/fitness_app/fitness_app_theme.dart';
-import 'package:autofarm/mainpage/fitness_app/models/meals_list_data.dart';
-import 'package:autofarm/mainpage/GetColor.dart';
+import 'package:autofarm/mainpage/fitness_app/HomeScreenTheme.dart';
+import 'package:autofarm/mainpage/fitness_app/models/Activity_List_Data.dart';
 import 'package:flutter/material.dart';
 
 import '../../GetColor.dart';
 
-class MealsListView extends StatefulWidget {
-  const MealsListView(
+
+class ActivityListView extends StatefulWidget {
+  const ActivityListView(
       {Key? key, this.mainScreenAnimationController, this.mainScreenAnimation})
       : super(key: key);
 
@@ -14,14 +14,13 @@ class MealsListView extends StatefulWidget {
   final Animation<double>? mainScreenAnimation;
 
   @override
-  _MealsListViewState createState() => _MealsListViewState();
+  _ActivityListViewState createState() => _ActivityListViewState();
 }
 
-class _MealsListViewState extends State<MealsListView>
+class _ActivityListViewState extends State<ActivityListView>
     with TickerProviderStateMixin {
   AnimationController? animationController;
-  List<MealsListData> mealsListData = MealsListData.tabIconsList;
-
+  List<ActivityListData> activityListData = ActivityListData.tabIconsList;
   @override
   void initState() {
     animationController = AnimationController(
@@ -56,21 +55,21 @@ class _MealsListViewState extends State<MealsListView>
               child: ListView.builder(
                 padding: const EdgeInsets.only(
                     top: 0, bottom: 0, right: 16, left: 16),
-                itemCount: mealsListData.length,
+                itemCount: activityListData.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {
                   final int count =
-                      mealsListData.length > 10 ? 10 : mealsListData.length;
+                  activityListData.length > 10 ? 10 : activityListData.length;
                   final Animation<double> animation =
-                      Tween<double>(begin: 0.0, end: 1.0).animate(
-                          CurvedAnimation(
-                              parent: animationController!,
-                              curve: Interval((1 / count) * index, 1.0,
-                                  curve: Curves.fastOutSlowIn)));
+                  Tween<double>(begin: 0.0, end: 1.0).animate(
+                      CurvedAnimation(
+                          parent: animationController!,
+                          curve: Interval((1 / count) * index, 1.0,
+                              curve: Curves.fastOutSlowIn)));
                   animationController?.forward();
 
-                  return MealsView(
-                    mealsListData: mealsListData[index],
+                  return ActivityView(
+                    activityListData: activityListData[index],
                     animation: animation,
                     animationController: animationController!,
                   );
@@ -84,12 +83,12 @@ class _MealsListViewState extends State<MealsListView>
   }
 }
 
-class MealsView extends StatelessWidget {
-  const MealsView(
-      {Key? key, this.mealsListData, this.animationController, this.animation})
+class ActivityView extends StatelessWidget {
+  const ActivityView(
+      {Key? key, this.activityListData, this.animationController, this.animation})
       : super(key: key);
 
-  final MealsListData? mealsListData;
+  final ActivityListData? activityListData;
   final AnimationController? animationController;
   final Animation<double>? animation;
 
@@ -114,15 +113,15 @@ class MealsView extends StatelessWidget {
                       decoration: BoxDecoration(
                         boxShadow: <BoxShadow>[
                           BoxShadow(
-                              color: HexColor(mealsListData!.endColor)
+                              color: HexColor(activityListData!.endColor)
                                   .withOpacity(0.6),
                               offset: const Offset(1.1, 4.0),
                               blurRadius: 8.0),
                         ],
                         gradient: LinearGradient(
                           colors: <HexColor>[
-                            HexColor(mealsListData!.startColor),
-                            HexColor(mealsListData!.endColor),
+                            HexColor(activityListData!.startColor),
+                            HexColor(activityListData!.endColor),
                           ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -142,7 +141,7 @@ class MealsView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              mealsListData!.titleTxt,
+                              activityListData!.titleTxt,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontFamily: FitnessAppTheme.fontName,
@@ -155,13 +154,13 @@ class MealsView extends StatelessWidget {
                             Expanded(
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.only(top: 8, bottom: 8),
+                                const EdgeInsets.only(top: 8, bottom: 8),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      mealsListData!.meals!.join('\n'),
+                                      activityListData!.Time,
                                       style: TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,
                                         fontWeight: FontWeight.w500,
@@ -174,60 +173,60 @@ class MealsView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            mealsListData?.kacl != 0
+                            activityListData?.gram != 0
                                 ? Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: <Widget>[
-                                      Text(
-                                        mealsListData!.kacl.toString(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontFamily: FitnessAppTheme.fontName,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 24,
-                                          letterSpacing: 0.2,
-                                          color: FitnessAppTheme.white,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 4, bottom: 3),
-                                        child: Text(
-                                          'kcal',
-                                          style: TextStyle(
-                                            fontFamily:
-                                                FitnessAppTheme.fontName,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 10,
-                                            letterSpacing: 0.2,
-                                            color: FitnessAppTheme.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : Container(
-                                    decoration: BoxDecoration(
-                                      color: FitnessAppTheme.nearlyWhite,
-                                      shape: BoxShape.circle,
-                                      boxShadow: <BoxShadow>[
-                                        BoxShadow(
-                                            color: FitnessAppTheme.nearlyBlack
-                                                .withOpacity(0.4),
-                                            offset: Offset(8.0, 8.0),
-                                            blurRadius: 8.0),
-                                      ],
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(6.0),
-                                      child: Icon(
-                                        Icons.add,
-                                        color: HexColor(mealsListData!.endColor),
-                                        size: 24,
-                                      ),
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  activityListData!.gram.toString(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontFamily: FitnessAppTheme.fontName,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 24,
+                                    letterSpacing: 0.2,
+                                    color: FitnessAppTheme.white,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 4, bottom: 3),
+                                  child: Text(
+                                    'kcal',
+                                    style: TextStyle(
+                                      fontFamily:
+                                      FitnessAppTheme.fontName,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 10,
+                                      letterSpacing: 0.2,
+                                      color: FitnessAppTheme.white,
                                     ),
                                   ),
+                                ),
+                              ],
+                            )
+                                : Container(
+                              decoration: BoxDecoration(
+                                color: FitnessAppTheme.nearlyWhite,
+                                shape: BoxShape.circle,
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                      color: FitnessAppTheme.nearlyBlack
+                                          .withOpacity(0.4),
+                                      offset: Offset(8.0, 8.0),
+                                      blurRadius: 8.0),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(6.0),
+                                child: Icon(
+                                  Icons.add,
+                                  color: HexColor(activityListData!.endColor),
+                                  size: 24,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),

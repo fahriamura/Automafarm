@@ -1,4 +1,5 @@
-import 'package:autofarm/mainpage/fitness_app/fitness_app_theme.dart';
+import 'package:autofarm/mainpage/PoultryForm.dart';
+import 'package:autofarm/mainpage/fitness_app/HomeScreenTheme.dart';
 import 'package:flutter/material.dart';
 
 class TitleView extends StatelessWidget {
@@ -6,13 +7,15 @@ class TitleView extends StatelessWidget {
   final String subTxt;
   final AnimationController? animationController;
   final Animation<double>? animation;
+  final VoidCallback? onTap;
 
   const TitleView(
       {Key? key,
       this.titleTxt= "",
       this.subTxt= "",
       this.animationController,
-      this.animation})
+      this.animation,
+        this.onTap,})
       : super(key: key);
 
   @override
@@ -46,7 +49,14 @@ class TitleView extends StatelessWidget {
                     InkWell(
                       highlightColor: Colors.transparent,
                       borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                      onTap: () {},
+                        onTap: () {
+                          // Navigasi ke halaman selanjutnya
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>
+                                PoultryForm()), // Ganti NextPage dengan nama halaman selanjutnya Anda
+                          );
+                        },
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8),
                         child: Row(

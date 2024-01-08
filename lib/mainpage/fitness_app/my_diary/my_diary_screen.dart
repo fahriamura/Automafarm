@@ -1,9 +1,10 @@
+import 'package:autofarm/mainpage/PoultryForm.dart';
 import 'package:autofarm/mainpage/fitness_app/ui_view/body_measurement.dart';
 import 'package:autofarm/mainpage/fitness_app/ui_view/glass_view.dart';
 import 'package:autofarm/mainpage/fitness_app/ui_view/mediterranean_diet_view.dart';
 import 'package:autofarm/mainpage/fitness_app/ui_view/title_view.dart';
-import 'package:autofarm/mainpage/fitness_app/fitness_app_theme.dart';
-import 'package:autofarm/mainpage/fitness_app/my_diary/meals_list_view.dart';
+import 'package:autofarm/mainpage/fitness_app/HomeScreenTheme.dart';
+import 'package:autofarm/mainpage/fitness_app/my_diary/ActivityListView.dart';
 import 'package:autofarm/mainpage/fitness_app/my_diary/water_view.dart';
 import 'package:flutter/material.dart';
 
@@ -81,18 +82,17 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
     );
     listViews.add(
       TitleView(
-        titleTxt: 'Food History',
-        subTxt: 'Customize',
+        titleTxt: 'Activity History',
+        subTxt: 'Add Activity',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
-            curve:
-                Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
+            curve: Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController!,
       ),
     );
 
     listViews.add(
-      MealsListView(
+      ActivityListView(
         mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0).animate(
             CurvedAnimation(
                 parent: widget.animationController!,
@@ -104,7 +104,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
 
     listViews.add(
       TitleView(
-        titleTxt: 'Body measurement',
+        titleTxt: 'Food Detail',
         subTxt: 'Today',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
@@ -125,8 +125,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
     );
     listViews.add(
       TitleView(
-        titleTxt: 'Water',
-        subTxt: 'Aqua SmartBottle',
+        titleTxt: 'Water Detail',
+        subTxt: 'Today',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
             curve:

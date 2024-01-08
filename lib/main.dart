@@ -1,12 +1,7 @@
 import 'package:autofarm/SplashScreen.dart';
-import 'package:autofarm/mainpage/fitness_app/fitness_app_home_screen.dart';
-import 'package:autofarm/mainpage/fitness_app/my_diary/meals_list_view.dart';
-import 'package:autofarm/mainpage/fitness_app/my_diary/my_diary_screen.dart';
-import 'package:autofarm/mainpage/introduction_animation/introduction_animation_screen.dart';
-import 'package:autofarm/mainpage/navigation_home_screen.dart';
 import 'package:flutter/material.dart';
 import 'flutter_login.dart';
-import 'package:autofarm/mainpage/home_screen.dart';
+
 
 void main() {
   runApp(const MyApp());

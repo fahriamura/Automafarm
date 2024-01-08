@@ -1,4 +1,4 @@
-import 'package:autofarm/mainpage/fitness_app/fitness_app_theme.dart';
+import 'package:autofarm/mainpage/fitness_app/HomeScreenTheme.dart';
 import 'package:flutter/material.dart';
 
 class BodyMeasurementView extends StatelessWidget {

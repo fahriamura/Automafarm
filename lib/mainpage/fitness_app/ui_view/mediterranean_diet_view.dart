@@ -1,9 +1,9 @@
-import 'package:autofarm/mainpage/fitness_app/fitness_app_theme.dart';
-import 'package:autofarm/mainpage/main.dart';
+import 'package:autofarm/mainpage/fitness_app/HomeScreenTheme.dart';
+import 'package:autofarm/mainpage/GetColor.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import '../models/meals_list_data.dart';
+import '../models/Activity_List_Data.dart';
 
 class MediterranesnDietView extends StatelessWidget {
   final AnimationController? animationController;
@@ -16,7 +16,7 @@ class MediterranesnDietView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int totalKacl = MealsListData.getTotalKacl();
+    int totalGram = ActivityListData.getTotalGram();
     const maxValue = 2000;
     double percentage = (1503 * animation!.value) / maxValue;
     double angle = 140 + (360 - 140) * (1.0 - percentage);
@@ -288,7 +288,7 @@ class MediterranesnDietView extends StatelessWidget {
                                             CrossAxisAlignment.center,
                                         children: <Widget>[
                                           Text(
-                                            '${(totalKacl * animation!.value).toInt()}',
+                                            '${(totalGram * animation!.value).toInt()}',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontFamily:
