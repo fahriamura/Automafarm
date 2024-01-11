@@ -50,7 +50,7 @@ class GlassView extends StatelessWidget {
                                 padding: const EdgeInsets.only(
                                     left: 68, bottom: 12, right: 16, top: 12),
                                 child: Text(
-                                  'Prepare your stomach for lunch with one or two glass of water',
+                                  'Dont Forget to Take Care Your Poultry',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontFamily: FitnessAppTheme.fontName,
@@ -72,7 +72,7 @@ class GlassView extends StatelessWidget {
                         child: SizedBox(
                           width: 80,
                           height: 80,
-                          child: Image.asset("assets/fitness_app/glass.png"),
+                          child: Image.asset("assets/images/glass.png"),
                         ),
                       )
                     ],

@@ -1,11 +1,12 @@
 import 'package:autofarm/mainpage/fitness_app/HomeScreenTheme.dart';
 import 'package:flutter/material.dart';
 
-class BodyMeasurementView extends StatelessWidget {
+class foodMeasuerementView extends StatelessWidget {
   final AnimationController? animationController;
   final Animation<double>? animation;
 
-  const BodyMeasurementView({Key? key, this.animationController, this.animation})
+  const foodMeasuerementView(
+      {Key? key, this.animationController, this.animation})
       : super(key: key);
 
   @override

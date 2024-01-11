@@ -49,14 +49,6 @@ class TitleView extends StatelessWidget {
                     InkWell(
                       highlightColor: Colors.transparent,
                       borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                        onTap: () {
-                          // Navigasi ke halaman selanjutnya
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) =>
-                                PoultryForm()), // Ganti NextPage dengan nama halaman selanjutnya Anda
-                          );
-                        },
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8),
                         child: Row(

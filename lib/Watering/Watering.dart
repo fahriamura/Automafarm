@@ -1,6 +1,4 @@
-import 'package:autofarm/ActivityList/ActivityList.dart';
 import 'package:autofarm/mainpage/PoultryForm.dart';
-import 'package:autofarm/mainpage/fitness_app/ui_view/Dialog.dart';
 import 'package:autofarm/mainpage/fitness_app/ui_view/foodMeasurement.dart';
 import 'package:autofarm/mainpage/fitness_app/ui_view/glass_view.dart';
 import 'package:autofarm/mainpage/fitness_app/ui_view/mediterranean_diet_view.dart';
@@ -10,15 +8,15 @@ import 'package:autofarm/mainpage/fitness_app/my_diary/ActivityListView.dart';
 import 'package:autofarm/mainpage/fitness_app/my_diary/water_view.dart';
 import 'package:flutter/material.dart';
 export 'package:autofarm/ActivityList/ActivityList.dart';
-class MyDiaryScreen extends StatefulWidget {
-  const MyDiaryScreen({Key? key, this.animationController}) : super(key: key);
+class Watering extends StatefulWidget {
+  const Watering({Key? key, this.animationController}) : super(key: key);
 
   final AnimationController? animationController;
   @override
-  _MyDiaryScreenState createState() => _MyDiaryScreenState();
+  _WateringState createState() => _WateringState();
 }
 
-class _MyDiaryScreenState extends State<MyDiaryScreen>
+class _WateringState extends State<Watering>
     with TickerProviderStateMixin {
   Animation<double>? topBarAnimation;
 
@@ -69,7 +67,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
             curve:
-                Interval((1 / count) * 0, 1.0, curve: Curves.fastOutSlowIn))),
+            Interval((1 / count) * 0, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController!,
       ),
     );
@@ -78,27 +76,18 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
             curve:
-                Interval((1 / count) * 1, 1.0, curve: Curves.fastOutSlowIn))),
+            Interval((1 / count) * 1, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController!,
       ),
     );
     listViews.add(
       TitleView(
         titleTxt: 'Activity History',
-        subTxt: 'More History',
+        subTxt: 'Add Activity',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
             curve: Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController!,
-        onTap: () {
-          // Navigasi ke halaman selanjutnya
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>
-                ActivityList()), // Ganti NextPage dengan nama halaman selanjutnya Anda
-          );
-        },
-
       ),
     );
 
@@ -116,11 +105,11 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
     listViews.add(
       TitleView(
         titleTxt: 'Food Detail',
-        subTxt: 'Add Food',
+        subTxt: 'Today',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
             curve:
-                Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
+            Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController!,
       ),
     );
@@ -130,27 +119,19 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
             curve:
-                Interval((1 / count) * 5, 1.0, curve: Curves.fastOutSlowIn))),
+            Interval((1 / count) * 5, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController!,
       ),
     );
     listViews.add(
       TitleView(
         titleTxt: 'Water Detail',
-        subTxt: 'Add Water',
+        subTxt: 'Today',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController!,
             curve:
-                Interval((1 / count) * 6, 1.0, curve: Curves.fastOutSlowIn))),
+            Interval((1 / count) * 6, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController!,
-        onTap: () {
-          // Navigasi ke halaman selanjutnya
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>
-                dialogView(context, true)), // Ganti NextPage dengan nama halaman selanjutnya Anda
-          );
-        },
       ),
     );
 
@@ -269,7 +250,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  name,
+                                  "Watering",
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontFamily: FitnessAppTheme.fontName,
