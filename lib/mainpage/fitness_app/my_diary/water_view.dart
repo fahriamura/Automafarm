@@ -1,3 +1,4 @@
+import 'package:autofarm/mainpage/fitness_app/models/Activity_List_Data.dart';
 import 'package:autofarm/mainpage/fitness_app/ui_view/wave_view.dart';
 import 'package:autofarm/mainpage/fitness_app/HomeScreenTheme.dart';
 import 'package:autofarm/mainpage/GetColor.dart';
@@ -20,7 +21,7 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
     await Future<dynamic>.delayed(const Duration(milliseconds: 50));
     return true;
   }
-
+double getPercentage = (ActivityListData.getTotalLiter()/4000) * 100;
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -69,7 +70,7 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                                       padding: const EdgeInsets.only(
                                           left: 4, bottom: 3),
                                       child: Text(
-                                        '2100',
+                                        '${ActivityListData.getTotalLiter()}',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontFamily: FitnessAppTheme.fontName,
@@ -100,7 +101,7 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                                   padding: const EdgeInsets.only(
                                       left: 4, top: 2, bottom: 14),
                                   child: Text(
-                                    'of daily goal 3.5L',
+                                    'of maximum 4L',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontFamily: FitnessAppTheme.fontName,
@@ -155,7 +156,7 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                                             fontFamily:
                                                 FitnessAppTheme.fontName,
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 14,
+                                            fontSize: 10,
                                             letterSpacing: 0.0,
                                             color: FitnessAppTheme.grey
                                                 .withOpacity(0.5),
@@ -275,7 +276,7 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                             ],
                           ),
                           child: WaveView(
-                            percentageValue: 60.0,
+                            percentageValue: getPercentage,
                           ),
                         ),
                       )

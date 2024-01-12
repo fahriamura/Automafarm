@@ -43,5 +43,41 @@ class ActivityListData {
       endColor: '#FFB295',
     ),
 
+    ActivityListData(
+
+      titleTxt: 'Watering',
+      liter: 1225,
+      Time:"8.30",
+      startColor: '#0000FF',
+      endColor: '#1E90FF',
+    ),
+
   ];
+}
+
+void createActivityFeedingListData(int gram) {
+  // Create a new ActivityListData object using the submitted text
+  ActivityListData newData = ActivityListData(
+    titleTxt: 'Feeding',
+    gram: gram,
+    Time: '',
+    startColor: '#FA7D82',
+    endColor:  '#FFB295',
+  );
+
+  ActivityListData.tabIconsList.add(newData);
+
+}
+
+void createActivityWateringListData(int liter) {
+  ActivityListData newData = ActivityListData(
+    titleTxt: 'Watering',
+    liter: liter,
+    Time: '',
+    startColor: '#0000FF',
+    endColor:  '#1E90FF',
+  );
+
+  ActivityListData.tabIconsList.add(newData);
+
 }

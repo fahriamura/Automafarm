@@ -17,8 +17,9 @@ class MediterranesnDietView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int totalGram = ActivityListData.getTotalGram();
-    const maxValue = 2000;
-    double percentage = (1503 * animation!.value) / maxValue;
+    int totalLiter= ActivityListData.getTotalLiter();
+    const maxLiter = 2000;
+    double percentage = (1503 * animation!.value) / maxLiter;
     double angle = 140 + (360 - 140) * (1.0 - percentage);
     return AnimatedBuilder(
       animation: animationController!,
@@ -183,7 +184,7 @@ class MediterranesnDietView extends StatelessWidget {
                                               padding: const EdgeInsets.only(
                                                   left: 4, bottom: 2),
                                               child: Text(
-                                                'Water Stock',
+                                                'Total Water',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontFamily:
@@ -213,7 +214,7 @@ class MediterranesnDietView extends StatelessWidget {
                                                       const EdgeInsets.only(
                                                           left: 4, bottom: 3),
                                                   child: Text(
-                                                    '${(102 * animation!.value).toInt()}',
+                                                    '${(totalLiter * animation!.value).toInt()}',
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                       fontFamily:
@@ -362,7 +363,7 @@ class MediterranesnDietView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  'Carbs',
+                                  'Water',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontFamily: FitnessAppTheme.fontName,
@@ -405,12 +406,12 @@ class MediterranesnDietView extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 6),
                                   child: Text(
-                                    '12g left',
+                                    '${4000 - ActivityListData.getTotalLiter()} liter left',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontFamily: FitnessAppTheme.fontName,
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 12,
+                                      fontSize: 8,
                                       color:
                                           FitnessAppTheme.grey.withOpacity(0.5),
                                     ),
@@ -429,7 +430,7 @@ class MediterranesnDietView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      'Protein',
+                                      'Food',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,
@@ -500,7 +501,7 @@ class MediterranesnDietView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      'Fat',
+                                      'Poultry',
                                       style: TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,
                                         fontWeight: FontWeight.w500,

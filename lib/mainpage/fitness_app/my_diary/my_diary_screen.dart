@@ -1,6 +1,6 @@
 import 'package:autofarm/ActivityList/ActivityList.dart';
 import 'package:autofarm/mainpage/PoultryForm.dart';
-import 'package:autofarm/mainpage/fitness_app/ui_view/Dialog.dart';
+import 'package:autofarm/mainpage/fitness_app/ui_view/WateringDialog.dart';
 import 'package:autofarm/mainpage/fitness_app/ui_view/foodMeasurement.dart';
 import 'package:autofarm/mainpage/fitness_app/ui_view/glass_view.dart';
 import 'package:autofarm/mainpage/fitness_app/ui_view/mediterranean_diet_view.dart';
@@ -9,6 +9,9 @@ import 'package:autofarm/mainpage/fitness_app/HomeScreenTheme.dart';
 import 'package:autofarm/mainpage/fitness_app/my_diary/ActivityListView.dart';
 import 'package:autofarm/mainpage/fitness_app/my_diary/water_view.dart';
 import 'package:flutter/material.dart';
+
+import '../MainHomeScreen.dart';
+import '../models/Activity_List_Data.dart';
 export 'package:autofarm/ActivityList/ActivityList.dart';
 class MyDiaryScreen extends StatefulWidget {
   const MyDiaryScreen({Key? key, this.animationController}) : super(key: key);
@@ -20,12 +23,14 @@ class MyDiaryScreen extends StatefulWidget {
 
 class _MyDiaryScreenState extends State<MyDiaryScreen>
     with TickerProviderStateMixin {
+  AnimationController? animationController;
   Animation<double>? topBarAnimation;
-
   List<Widget> listViews = <Widget>[];
   final ScrollController scrollController = ScrollController();
   double topBarOpacity = 0.0;
-
+  Widget tabBody = Container(
+    color: FitnessAppTheme.background,
+  );
   @override
   void initState() {
     topBarAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -134,6 +139,9 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
         animationController: widget.animationController!,
       ),
     );
+    animationController = AnimationController(
+        duration: const Duration(milliseconds: 600), vsync: this);
+    tabBody = MyDiaryScreen(animationController: animationController);
     listViews.add(
       TitleView(
         titleTxt: 'Water Detail',
@@ -143,12 +151,19 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
             curve:
                 Interval((1 / count) * 6, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController!,
-        onTap: () {
-          // Navigasi ke halaman selanjutnya
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>
-                dialogView(context, true)), // Ganti NextPage dengan nama halaman selanjutnya Anda
+        onTap: () async {
+            await InputWateringDialog.show(
+            context: context,
+            title: 'How Much Liter?',
+            okText: 'OK',
+            cancelText: 'Cancel',
+              onOkPressed: () {
+                setState(() {
+                  tabBody =
+                      MyDiaryScreen(animationController: animationController);
+                }); // Refresh the page
+              },
+
           );
         },
       ),
