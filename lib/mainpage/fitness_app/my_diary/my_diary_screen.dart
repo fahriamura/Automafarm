@@ -1,5 +1,6 @@
 import 'package:autofarm/ActivityList/ActivityList.dart';
 import 'package:autofarm/mainpage/PoultryForm.dart';
+import 'package:autofarm/mainpage/fitness_app/ui_view/FeedingDialog.dart';
 import 'package:autofarm/mainpage/fitness_app/ui_view/WateringDialog.dart';
 import 'package:autofarm/mainpage/fitness_app/ui_view/foodMeasurement.dart';
 import 'package:autofarm/mainpage/fitness_app/ui_view/glass_view.dart';
@@ -127,6 +128,21 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
             curve:
                 Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController!,
+        onTap: () async {
+          await InputFeedingDialog.show(
+            context: context,
+            title: 'How Much Gram?',
+            okText: 'OK',
+            cancelText: 'Cancel',
+            onOkPressed: () {
+              setState(() {
+                tabBody =
+                    MyDiaryScreen(animationController: animationController);
+              }); // Refresh the page
+            },
+
+          );
+        },
       ),
     );
 
@@ -137,6 +153,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
             curve:
                 Interval((1 / count) * 5, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController!,
+
       ),
     );
     animationController = AnimationController(

@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:intl/intl.dart';
+
 class ActivityListData {
   ActivityListData({
 
@@ -55,12 +59,14 @@ class ActivityListData {
   ];
 }
 
+
 void createActivityFeedingListData(int gram) {
+  DateTime now = DateTime.now();
   // Create a new ActivityListData object using the submitted text
   ActivityListData newData = ActivityListData(
     titleTxt: 'Feeding',
     gram: gram,
-    Time: '',
+    Time: DateFormat('kk:mm:ss \n EEE d MMM').format(now).toString(),
     startColor: '#FA7D82',
     endColor:  '#FFB295',
   );
@@ -70,10 +76,12 @@ void createActivityFeedingListData(int gram) {
 }
 
 void createActivityWateringListData(int liter) {
+  DateTime now = DateTime.now();
+  log(DateFormat('kk:mm:ss \n EEE d MMM').format(now).toString());
   ActivityListData newData = ActivityListData(
     titleTxt: 'Watering',
     liter: liter,
-    Time: '',
+    Time: DateFormat('kk:mm:ss \n EEE d MMM').format(now).toString(),
     startColor: '#0000FF',
     endColor:  '#1E90FF',
   );

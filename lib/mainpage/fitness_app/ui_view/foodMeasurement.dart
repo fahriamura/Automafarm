@@ -1,9 +1,12 @@
 import 'package:autofarm/mainpage/fitness_app/HomeScreenTheme.dart';
+import 'package:autofarm/mainpage/fitness_app/models/Activity_List_Data.dart';
 import 'package:flutter/material.dart';
+
 
 class foodMeasuerementView extends StatelessWidget {
   final AnimationController? animationController;
   final Animation<double>? animation;
+
 
   const foodMeasuerementView(
       {Key? key, this.animationController, this.animation})
@@ -11,6 +14,13 @@ class foodMeasuerementView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int FoodTotal = ActivityListData.getTotalGram();
+    int maxFood = 2000;
+    int FoodLeft =  maxFood - FoodTotal;
+    ActivityListData lastFeedingActivity = ActivityListData.tabIconsList
+        .where((activity) => activity.titleTxt == 'Feeding')
+        .last;
+    String lastFeedingTime = lastFeedingActivity.Time;
     return AnimatedBuilder(
       animation: animationController!,
       builder: (BuildContext context, Widget? child) {
@@ -50,7 +60,7 @@ class foodMeasuerementView extends StatelessWidget {
                             padding: const EdgeInsets.only(
                                 left: 4, bottom: 8, top: 16),
                             child: Text(
-                              'Weight',
+                              'Food Used',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontFamily: FitnessAppTheme.fontName,
@@ -72,7 +82,7 @@ class foodMeasuerementView extends StatelessWidget {
                                     padding: const EdgeInsets.only(
                                         left: 4, bottom: 3),
                                     child: Text(
-                                      '206.8',
+                                      '${FoodTotal}',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,
@@ -86,7 +96,7 @@ class foodMeasuerementView extends StatelessWidget {
                                     padding: const EdgeInsets.only(
                                         left: 8, bottom: 8),
                                     child: Text(
-                                      'Ibs',
+                                      'Gram',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,
@@ -116,13 +126,13 @@ class foodMeasuerementView extends StatelessWidget {
                                         padding:
                                             const EdgeInsets.only(left: 4.0),
                                         child: Text(
-                                          'Today 8:26 AM',
+                                          'Last Feeding ${lastFeedingTime}',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontFamily:
                                                 FitnessAppTheme.fontName,
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 14,
+                                            fontSize: 12,
                                             letterSpacing: 0.0,
                                             color: FitnessAppTheme.grey
                                                 .withOpacity(0.5),
@@ -135,7 +145,7 @@ class foodMeasuerementView extends StatelessWidget {
                                     padding: const EdgeInsets.only(
                                         top: 4, bottom: 14),
                                     child: Text(
-                                      'InBody SmartScale',
+                                      '',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,
@@ -175,7 +185,7 @@ class foodMeasuerementView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  '185 cm',
+                                  '${maxFood} gram',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontFamily: FitnessAppTheme.fontName,
@@ -188,7 +198,7 @@ class foodMeasuerementView extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 6),
                                   child: Text(
-                                    'Height',
+                                    'Max Food',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontFamily: FitnessAppTheme.fontName,
@@ -212,7 +222,7 @@ class foodMeasuerementView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
                                     Text(
-                                      '27.3 BMI',
+                                      '${FoodLeft} gram',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,
@@ -225,7 +235,7 @@ class foodMeasuerementView extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(top: 6),
                                       child: Text(
-                                        'Overweight',
+                                        'Food Left',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontFamily: FitnessAppTheme.fontName,
@@ -251,7 +261,7 @@ class foodMeasuerementView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: <Widget>[
                                     Text(
-                                      '20%',
+                                      '${((FoodTotal/2000) *100).toInt()}%',
                                       style: TextStyle(
                                         fontFamily: FitnessAppTheme.fontName,
                                         fontWeight: FontWeight.w500,
@@ -263,7 +273,7 @@ class foodMeasuerementView extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(top: 6),
                                       child: Text(
-                                        'Body fat',
+                                        'Food Used',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontFamily: FitnessAppTheme.fontName,

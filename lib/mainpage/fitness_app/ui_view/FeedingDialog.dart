@@ -6,11 +6,11 @@ import 'package:intl/intl.dart';
 
 import '../HomeScreenTheme.dart';
 import '../my_diary/my_diary_screen.dart';
-import 'FeedingDialog.dart';
 const _defaultCancelText = 'Cancel';
 const _defaultOkText = 'OK';
 const _defaultTitle = 'Enter Text';
-class InputWateringDialog extends StatefulWidget {
+DateTime now = DateTime.now();
+class InputFeedingDialog extends StatefulWidget {
 
   final String cancelText;
 
@@ -20,14 +20,14 @@ class InputWateringDialog extends StatefulWidget {
 
   final String title;
 
-  final Function(int) createActivityWateringListData;
+  final Function(int) createActivityFeedingListData;
 
-  const InputWateringDialog({
+  const InputFeedingDialog({
     Key? key,
     this.cancelText = _defaultCancelText,
     this.okText = _defaultOkText,
     this.title = _defaultTitle,
-    required this.createActivityWateringListData,
+    required this.createActivityFeedingListData,
   }) :  super(key : key);
 
 
@@ -42,17 +42,17 @@ class InputWateringDialog extends StatefulWidget {
   }) async {
     return showDialog(
       context: context,
-      builder: (_) => InputWateringDialog(
+      builder: (_) => InputFeedingDialog(
         cancelText: cancelText,
         okText: okText,
         title: title,
-        createActivityWateringListData: (value) {
+        createActivityFeedingListData: (value) {
           ActivityListData newData = ActivityListData(
-            titleTxt: 'Watering',
-            liter: value,
+            titleTxt: 'Feeding',
+            gram: value,
             Time: DateFormat('kk:mm:ss \n EEE d MMM').format(now).toString(),
-            startColor: '#0000FF',
-            endColor: '#1E90FF',
+            startColor: '#FA7D82',
+            endColor: '#FFB295',
           );
           ActivityListData.tabIconsList.add(newData);
           onOkPressed();
@@ -63,7 +63,7 @@ class InputWateringDialog extends StatefulWidget {
   }
 
   @override
-  State<InputWateringDialog> createState() => _InputWateringDialogState();
+  State<InputFeedingDialog> createState() => _InputFeedingDialogState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -74,7 +74,7 @@ class InputWateringDialog extends StatefulWidget {
   }
 }
 
-class _InputWateringDialogState extends State<InputWateringDialog> {
+class _InputFeedingDialogState extends State<InputFeedingDialog> {
   final _controller = TextEditingController();
 
   AnimationController? animationController;
@@ -110,8 +110,8 @@ class _InputWateringDialogState extends State<InputWateringDialog> {
   }
 
   void _ok() {
-    int liter = int.tryParse(_controller.text) ?? 0;
-    widget.createActivityWateringListData(liter);
+    int gram = int.tryParse(_controller.text) ?? 0;
+    widget.createActivityFeedingListData(gram);
     setState(() {
       tabBody =
           MyDiaryScreen(animationController: animationController);
