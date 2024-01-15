@@ -1,3 +1,4 @@
+import 'package:autofarm/flutter_login.dart';
 import 'package:autofarm/mainpage/fitness_app/models/tabIcon_data.dart';
 import 'package:flutter/material.dart';
 import 'bottom_navigation_view/bottom_bar_view.dart';
@@ -81,19 +82,29 @@ class _MainHomeScreenState extends State<MainHomeScreen>
             if (index == 0 || index == 2) {
               animationController?.reverse().then<dynamic>((data) {
                 if (!mounted) {
-                  return;
+                  return
+                    setState(() {
+                      tabBody =
+                          LoginScreen();
+                    });
                 }
                 setState(() {
                   tabBody =
-                      MyDiaryScreen(animationController: animationController);
+                      LoginScreen();
                 });
               });
             } else if (index == 1 || index == 3) {
               animationController?.reverse().then<dynamic>((data) {
                 if (!mounted) {
-                  return;
+                  return
+                    setState(() {
+                      tabBody =
+                          LoginScreen();
+                    });
                 }
                 setState(() {
+                  tabBody =
+                      LoginScreen();
                 });
               });
             }

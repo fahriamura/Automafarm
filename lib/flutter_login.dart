@@ -1,7 +1,10 @@
 import 'package:autofarm/mainpage/fitness_app/MainHomeScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'firebase_auth/firebase_auth_service.dart';
 
 
 const users = {
@@ -10,39 +13,56 @@ const users = {
 };
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Duration get loginTime => const Duration(milliseconds: 2250);
 
-  Future<String?> _authUser(LoginData data) {
-    debugPrint('Name: ${data.name}, Password: ${data.password}');
-    return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(data.name)) {
-        return 'User not exists';
+
+  Future<String?> _signupUser(LoginData data) async {
+
+    try {
+      UserCredential credential =await _auth.createUserWithEmailAndPassword(email: data.name, password: data.password);
+      return credential.user;
+    } on FirebaseAuthException catch (e) {
+
+      if (e.code == 'email-already-in-use') {
+        showToast(message: 'The email address is already in use.');
+      } else {
+        showToast(message: 'An error occurred: ${e.code}');
       }
-      if (users[data.name] != data.password) {
-        return 'Password does not match';
-      }
-      return null;
-    });
+    }
+    return null;
+
   }
 
-  Future<String?> _signupUser(SignupData data) {
-    debugPrint('Signup Name: ${data.name}, Password: ${data.password}');
-    return Future.delayed(loginTime).then((_) {
-      return null;
-    });
+  Future<String?> _authUser(LoginData data) async {
+
+    try {
+      UserCredential credential =await _auth.signInWithEmailAndPassword(email: data.name, password: data.password);
+      return credential.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+        showToast(message: 'Invalid email or password.');
+      } else {
+        showToast(message: 'An error occurred: ${e.code}');
+      }
+
+    }
+    return null;
+
   }
 
-  Future<String> _recoverPassword(String name) {
-    debugPrint('Name: $name');
-    return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(name)) {
-        return 'User not exists';
-      }
-      return "";
-    });
+
+
+  Future<String?> _recoverPassword(String name) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: name);
+      return null;
+    } catch (e) {
+      return e.toString();
+    }
   }
 
   @override
