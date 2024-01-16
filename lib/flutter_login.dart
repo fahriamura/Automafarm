@@ -1,16 +1,13 @@
+import 'package:autofarm/firebase_auth/firebase_auth_service.dart';
 import 'package:autofarm/mainpage/fitness_app/MainHomeScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'firebase_auth/firebase_auth_service.dart';
 
+UserModel a = new UserModel(id: 'a',username: 'b',adress: 'c',age: 3);
 
-const users = {
-  'a@gmail.com': '123',
-  'hunter@gmail.com': 'hunter',
-};
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -20,38 +17,31 @@ class LoginScreen extends StatelessWidget {
   Duration get loginTime => const Duration(milliseconds: 2250);
 
 
-  Future<String?> _signupUser(LoginData data) async {
+  Future<String?> _signupUser(SignupData data) async {
 
     try {
-      UserCredential credential =await _auth.createUserWithEmailAndPassword(email: data.name, password: data.password);
-      return credential.user;
+      await _auth.createUserWithEmailAndPassword(email: data.name, password: data.password);
+      return null; // Successfully signed up
     } on FirebaseAuthException catch (e) {
-
       if (e.code == 'email-already-in-use') {
-        showToast(message: 'The email address is already in use.');
+        return 'The email address is already in use.';
       } else {
-        showToast(message: 'An error occurred: ${e.code}');
+        return 'An error occurred: ${e.code}';
       }
     }
-    return null;
-
   }
 
   Future<String?> _authUser(LoginData data) async {
-
     try {
-      UserCredential credential =await _auth.signInWithEmailAndPassword(email: data.name, password: data.password);
-      return credential.user;
+      await _auth.signInWithEmailAndPassword(email: data.name, password: data.password);
+      return null; // Successfully authenticated
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found' || e.code == 'wrong-password') {
-        showToast(message: 'Invalid email or password.');
+        return 'Invalid email or password.';
       } else {
-        showToast(message: 'An error occurred: ${e.code}');
+        return 'An error occurred: ${e.code}';
       }
-
     }
-    return null;
-
   }
 
 

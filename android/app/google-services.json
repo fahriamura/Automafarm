@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "988122638107",
+    "project_id": "automafarm",
+    "storage_bucket": "automafarm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988122638107:android:b9de2be0284c0e3a7855be",
+        "android_client_info": {
+          "package_name": "com.QuantumNinja.Automafarm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "988122638107-rnmhofm65se40kbul6grsigfe6e091dj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUOLebmIhl4_7-xHmLub-HW1PKdSl_XKk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "988122638107-rnmhofm65se40kbul6grsigfe6e091dj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:988122638107:android:f3ba60c41c0946a07855be",
+        "android_client_info": {
+          "package_name": "com.example.autofarm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "988122638107-rnmhofm65se40kbul6grsigfe6e091dj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUOLebmIhl4_7-xHmLub-HW1PKdSl_XKk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "988122638107-rnmhofm65se40kbul6grsigfe6e091dj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

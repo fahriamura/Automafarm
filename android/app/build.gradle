@@ -2,7 +2,9 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
+    id 'com.google.gms.google-services'
 }
+
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
@@ -26,7 +28,6 @@ android {
     namespace "com.example.autofarm"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -45,8 +46,8 @@ android {
         applicationId "com.example.autofarm"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        minSdkVersion localProperties.getProperty('flutter.minSdkVersion').toInteger()
+        targetSdkVersion localProperties.getProperty('flutter.targetSdkVersion').toInteger()
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -64,4 +65,17 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    'com.android.support:design:28.0.0'
+    'com.android.support:palette-v7:28.0.0'
+    'com.astuetz:pagerslidingtabstrip:1.0.1'
+    'com.android.support:appcompat-v7:28.0.0'
+    'com.android.support:support-v4:28.0.0'
+    'com.onesignal:OneSignal:@aar'
+    'com.google.android.gms:play-services:12.0.1'
+    'com.google.android.gms:play-services:12.0.1'
+    'com.google.android.gms:play-services-analytics:18.0.4'
+    implementation platform('com.google.firebase:firebase-bom:30.2.0')
+}
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.android.application'
