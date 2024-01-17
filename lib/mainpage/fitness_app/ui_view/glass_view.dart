@@ -31,7 +31,7 @@ class GlassView extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 16),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: HexColor("#D7E0F9"),
+                            color: HexColor("#FFA500"),
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(8.0),
                                 bottomLeft: Radius.circular(8.0),
@@ -72,7 +72,7 @@ class GlassView extends StatelessWidget {
                         child: SizedBox(
                           width: 80,
                           height: 80,
-                          child: Image.asset("assets/images/glass.png"),
+                          child: Image.asset("assets/images/chicken.png"),
                         ),
                       )
                     ],

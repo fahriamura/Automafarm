@@ -29,19 +29,13 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/ayam.png',
-              width: 50,
-              height: 50,
+              'assets/images/LogoHackfest.png',
+              width: 200,
+              height: 200,
             ),
             SizedBox(height: 20),
-            Text(
-              'AUTOMAFARM',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
+
+
           ],
         ),
       ),

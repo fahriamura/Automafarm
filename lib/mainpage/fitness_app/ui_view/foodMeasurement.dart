@@ -132,7 +132,7 @@ class foodMeasuerementView extends StatelessWidget {
                                             fontFamily:
                                                 FitnessAppTheme.fontName,
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 12,
+                                            fontSize: 8,
                                             letterSpacing: 0.0,
                                             color: FitnessAppTheme.grey
                                                 .withOpacity(0.5),

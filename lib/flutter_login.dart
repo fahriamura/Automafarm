@@ -58,8 +58,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
-      title: 'AUTOMAFARM',
-      logo: const AssetImage('assets/images/ayam.png'),
+      logo: const AssetImage('assets/images/LogoHackfest.png'),
 
       onLogin: _authUser,
       onSignup: _signupUser,
