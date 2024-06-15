@@ -75,6 +75,7 @@ dependencies {
     'com.google.android.gms:play-services:12.0.1'
     'com.google.android.gms:play-services:12.0.1'
     'com.google.android.gms:play-services-analytics:18.0.4'
+    implementation 'com.google.android.gms:play-services-maps'
     implementation platform('com.google.firebase:firebase-bom:30.2.0')
 }
 apply plugin: 'com.google.gms.google-services'

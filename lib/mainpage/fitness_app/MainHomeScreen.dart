@@ -1,5 +1,8 @@
 import 'package:autofarm/flutter_login.dart';
+import 'package:autofarm/mainpage/PoultryForm.dart';
 import 'package:autofarm/mainpage/fitness_app/models/tabIcon_data.dart';
+import 'package:autofarm/mainpage/fitness_app/ui_view/UserAdapter.dart';
+import 'package:autofarm/mainpage/fitness_app/ui_view/nearbyadapter.dart';
 import 'package:flutter/material.dart';
 import 'bottom_navigation_view/bottom_bar_view.dart';
 import 'HomeScreenTheme.dart';
@@ -8,6 +11,8 @@ import 'my_diary/my_diary_screen.dart';
 class MainHomeScreen extends StatefulWidget {
   @override
   _MainHomeScreenState createState() => _MainHomeScreenState();
+  final int userID;
+  MainHomeScreen({required this.userID});
 }
 
 class _MainHomeScreenState extends State<MainHomeScreen>
@@ -25,11 +30,11 @@ class _MainHomeScreenState extends State<MainHomeScreen>
     tabIconsList.forEach((TabIconData tab) {
       tab.isSelected = false;
     });
-    tabIconsList[0].isSelected = true;
+    print(widget.userID);
 
     animationController = AnimationController(
         duration: const Duration(milliseconds: 600), vsync: this);
-    tabBody = MyDiaryScreen(animationController: animationController);
+    tabBody = MyDiaryScreen(animationController: animationController, userID : widget.userID);
     super.initState();
   }
 
@@ -77,35 +82,42 @@ class _MainHomeScreenState extends State<MainHomeScreen>
         ),
         BottomBarView(
           tabIconsList: tabIconsList,
-          addClick: () {},
+          addClick: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PoultryForm(userID: widget.userID,)));
+          },
           changeIndex: (int index) {
-            if (index == 0 || index == 2) {
+            if (index == 0 ){
               animationController?.reverse().then<dynamic>((data) {
                 if (!mounted) {
-                  return
-                    setState(() {
-                      tabBody =
-                          LoginScreen();
-                    });
+
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MainHomeScreen(userID: widget.userID,)));
                 }
                 setState(() {
-                  tabBody =
-                      LoginScreen();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MainHomeScreen(userID: widget.userID,)));
                 });
               });
-            } else if (index == 1 || index == 3) {
+            } else if (index == 1) {
               animationController?.reverse().then<dynamic>((data) {
                 if (!mounted) {
-                  return
-                    setState(() {
-                      tabBody =
-                          LoginScreen();
-                    });
+                  return;
                 }
-                setState(() {
-                  tabBody =
-                      LoginScreen();
-                });
+                Navigator.push(context, MaterialPageRoute(builder: (context) => PoultryForm(userID: widget.userID,)));
+              });
+            }
+            else if (index == 2) {
+              animationController?.reverse().then<dynamic>((data) {
+                if (!mounted) {
+                  return;
+                }
+                Navigator.push(context, MaterialPageRoute(builder: (context) => NearbyAdapter(UserID: widget.userID)));
+              });
+            }
+            else if (index == 3) {
+              animationController?.reverse().then<dynamic>((data) {
+                if (!mounted) {
+                  return;
+                }
+                Navigator.push(context, MaterialPageRoute(builder: (context) => UserAdapter(UserID: widget.userID)));
               });
             }
           },

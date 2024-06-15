@@ -1,68 +1,67 @@
-import 'package:autofarm/firebase_auth/firebase_auth_service.dart';
-import 'package:autofarm/mainpage/fitness_app/MainHomeScreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:autofarm/mainpage/fitness_app/MainHomeScreen.dart';
+import 'package:autofarm/mainpage/fitness_app/models/user.dart';
+import 'package:autofarm/firebase_auth/firebase_auth_service.dart';
 
-
-UserModel a = new UserModel(id: 'a',username: 'b',adress: 'c',age: 3);
-
+import 'mainpage/PoultryForm.dart';
 
 class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
-
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  LoginScreen({Key? key}) : super(key: key);
 
   Duration get loginTime => const Duration(milliseconds: 2250);
 
-
-  Future<String?> _signupUser(SignupData data) async {
-
+  Future<String?> _signupUser(BuildContext context, SignupData data) async {
     try {
-      await _auth.createUserWithEmailAndPassword(email: data.name, password: data.password);
-      return null; // Successfully signed up
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-in-use') {
-        return 'The email address is already in use.';
+      Map<String, dynamic>? response = (await AuthApi.register(data.name, data.password)) as Map<String, dynamic>?;
+      if (response != null && !response['error']) {
+        // Navigate to FormView with UserID
+        int userID = response['data']['user']['UserID'];
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => PoultryForm(userID: userID),
+        ));
+        return null; // Successfully signed up
       } else {
-        return 'An error occurred: ${e.code}';
+        return 'Failed to sign up: ${response?['message']}';
       }
+    } catch (e) {
+      return 'An error occurred: $e';
     }
   }
 
-  Future<String?> _authUser(LoginData data) async {
+  Future<String?> _authUser(BuildContext context, LoginData data) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: data.name, password: data.password);
-      return null; // Successfully authenticated
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+      UserData? userData = await AuthApi.login(data.name, data.password);
+      print(userData);
+      if (userData != null) {
+        int userID = userData.userID;
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => MainHomeScreen(userID: userID),
+        ));
+        return null; // Successfully authenticated
+      } else {
         return 'Invalid email or password.';
-      } else {
-        return 'An error occurred: ${e.code}';
       }
+    } catch (e) {
+      print(e);
+      return 'An error occurred: $e';
+
     }
   }
-
-
 
   Future<String?> _recoverPassword(String name) async {
-    try {
-      await _auth.sendPasswordResetEmail(email: name);
-      return null;
-    } catch (e) {
-      return e.toString();
-    }
+    // Implement password recovery logic here
+    return 'Password recovery not implemented.';
   }
 
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
       logo: const AssetImage('assets/images/LogoHackfest.png'),
-
-      onLogin: _authUser,
-      onSignup: _signupUser,
-      theme:LoginTheme(
+      onLogin: (loginData) => _authUser(context, loginData),
+      onSignup: (signupData) => _signupUser(context, signupData),
+      theme: LoginTheme(
         primaryColor: Colors.orangeAccent,
         accentColor: Colors.black,
       ),
@@ -88,11 +87,7 @@ class LoginScreen extends StatelessWidget {
           },
         ),
       ],
-      onSubmitAnimationCompleted: () {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => MainHomeScreen(),
-        ));
-      },
+      onSubmitAnimationCompleted: () {},
       onRecoverPassword: _recoverPassword,
     );
   }

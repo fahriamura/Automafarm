@@ -1,5 +1,6 @@
 import 'package:autofarm/mainpage/fitness_app/HomeScreenTheme.dart';
 import 'package:autofarm/mainpage/GetColor.dart';
+import 'package:autofarm/mainpage/fitness_app/models/kandang.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -16,15 +17,15 @@ class MediterranesnDietView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int totalGram = ActivityListData.getTotalGram();
-    int totalLiter= ActivityListData.getTotalLiter();
 
-    const maxLiter = 4000;
-    const maxGram = 2000;
+    int totalGram = ActivityListData.getTotalGram(ActivityListData.tabIconsList);
+    int totalLiter= ActivityListData.getTotalLiter(ActivityListData.tabIconsList);
+    int maxLiter = 4000;
+    int maxGram = 2000;
     int foodLeft = maxGram -totalGram;
     int waterLeft = maxLiter-totalLiter;
-    int poultry = 10;
-    double percentage = ((foodLeft + waterLeft) * animation!.value) / (poultry*100);
+    int poultrys = 10;
+    double percentage = ((foodLeft + waterLeft) * animation!.value) / (poultrys*100);
     double angle = 140 + (360 - 140) * (1.0 - percentage);
     return AnimatedBuilder(
       animation: animationController!,
@@ -89,7 +90,7 @@ class MediterranesnDietView extends StatelessWidget {
                                               padding: const EdgeInsets.only(
                                                   left: 4, bottom: 2),
                                               child: Text(
-                                                'Foodstock',
+                                                'Food Used',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontFamily:
@@ -294,7 +295,7 @@ class MediterranesnDietView extends StatelessWidget {
                                             CrossAxisAlignment.center,
                                         children: <Widget>[
                                           Text(
-                                            '${(((foodLeft + waterLeft)/poultry)/100 * animation!.value).toInt()}%',
+                                            '${(((foodLeft + waterLeft)/poultrys)/100 * animation!.value).toInt()}%',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontFamily:
@@ -411,7 +412,7 @@ class MediterranesnDietView extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 6),
                                   child: Text(
-                                    '${4000 - ActivityListData.getTotalLiter()} liter left',
+                                    '${4000 - ActivityListData.getTotalLiter(ActivityListData.tabIconsList)} liter left',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontFamily: FitnessAppTheme.fontName,
@@ -551,7 +552,7 @@ class MediterranesnDietView extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(top: 6),
                                       child: Text(
-                                        '${poultry} left',
+                                        '${poultrys} left',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontFamily: FitnessAppTheme.fontName,

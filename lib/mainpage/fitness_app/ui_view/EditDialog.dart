@@ -12,21 +12,21 @@ const _defaultOkText = 'OK';
 const _defaultTitle = 'Enter Text';
 DateTime now = DateTime.now();
 
-class InputFeedingDialog extends StatefulWidget {
+class InputPoultryDialog extends StatefulWidget {
   final String cancelText;
   final String okText;
   final String title;
   final int UserID;
   final String namakandang;
-  final Function(int) createActivityFeedingListData;
+  final Function(int, int) createActivityPoultryListData;
 
-  const InputFeedingDialog({
+  const InputPoultryDialog({
     Key? key,
     this.cancelText = _defaultCancelText,
     this.okText = _defaultOkText,
     this.title = _defaultTitle,
     required this.namakandang,
-    required this.createActivityFeedingListData,
+    required this.createActivityPoultryListData,
     required this.UserID,
   }) : super(key: key);
 
@@ -41,22 +41,24 @@ class InputFeedingDialog extends StatefulWidget {
   }) async {
     return showDialog(
       context: context,
-      builder: (_) => InputFeedingDialog(
+      builder: (_) => InputPoultryDialog(
         cancelText: cancelText,
         okText: okText,
         title: title,
         UserID: UserID,
         namakandang: namakandang,
-        createActivityFeedingListData: (value) async {
+        createActivityPoultryListData: (foodValue, waterValue) async {
           ActivityListData newData = ActivityListData(
             aktivitasID: UserID,
-            titleTxt: 'Feeding',
-            gram: value,
+            titleTxt: 'Poultry',
+            gram: foodValue,
+            liter: waterValue,
             Time: DateFormat('kk:mm:ss \n EEE d MMM').format(now).toString(),
             startColor: '#FA7D82',
             endColor: '#FFB295',
           );
-          await ActivityListData.subFood(namakandang, value.toDouble());
+          await ActivityListData.postFood(namakandang, foodValue.toDouble());
+          await ActivityListData.postWater(namakandang, waterValue.toDouble());
           onOkPressed();
         },
       ),
@@ -64,11 +66,12 @@ class InputFeedingDialog extends StatefulWidget {
   }
 
   @override
-  State<InputFeedingDialog> createState() => _InputFeedingDialogState();
+  State<InputPoultryDialog> createState() => _InputPoultryDialogState();
 }
 
-class _InputFeedingDialogState extends State<InputFeedingDialog> {
-  final _controller = TextEditingController();
+class _InputPoultryDialogState extends State<InputPoultryDialog> {
+  final _foodController = TextEditingController();
+  final _waterController = TextEditingController();
   AnimationController? animationController;
   Widget tabBody = Container(
     color: FitnessAppTheme.background,
@@ -78,10 +81,20 @@ class _InputFeedingDialogState extends State<InputFeedingDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(widget.title),
-      content: TextField(
-        controller: _controller,
-        autofocus: true,
-        onSubmitted: (_) => _ok(),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          TextField(
+            controller: _foodController,
+            decoration: InputDecoration(labelText: 'Total Food'),
+            keyboardType: TextInputType.number,
+          ),
+          TextField(
+            controller: _waterController,
+            decoration: InputDecoration(labelText: 'Total Water'),
+            keyboardType: TextInputType.number,
+          ),
+        ],
       ),
       actions: <Widget>[
         ElevatedButton(
@@ -99,8 +112,9 @@ class _InputFeedingDialogState extends State<InputFeedingDialog> {
   }
 
   void _ok() {
-    int gram = int.tryParse(_controller.text) ?? 0;
-    widget.createActivityFeedingListData(gram);
+    int foodValue = int.tryParse(_foodController.text) ?? 0;
+    int waterValue = int.tryParse(_waterController.text) ?? 0;
+    widget.createActivityPoultryListData(foodValue, waterValue);
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -111,7 +125,8 @@ class _InputFeedingDialogState extends State<InputFeedingDialog> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    _foodController.dispose();
+    _waterController.dispose();
     super.dispose();
   }
 }

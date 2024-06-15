@@ -9,8 +9,8 @@ import 'package:autofarm/mainpage/fitness_app/my_diary/water_view.dart';
 import 'package:flutter/material.dart';
 export 'package:autofarm/ActivityList/ActivityList.dart';
 class ActivityList extends StatefulWidget {
-  const ActivityList({Key? key, this.animationController}) : super(key: key);
-
+  const ActivityList({Key? key, this.animationController,required this.userID}) : super(key: key);
+  final int userID; 
   final AnimationController? animationController;
   @override
   _ActivityList createState() => _ActivityList();
@@ -99,6 +99,7 @@ class _ActivityList extends State<ActivityList>
                 curve: Interval((1 / count) * 3, 1.0,
                     curve: Curves.fastOutSlowIn))),
         mainScreenAnimationController: widget.animationController,
+        userID: widget.userID,
       ),
     );
 
@@ -121,6 +122,7 @@ class _ActivityList extends State<ActivityList>
             curve:
             Interval((1 / count) * 5, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController!,
+        UserID: widget.userID,
       ),
     );
     listViews.add(
@@ -137,6 +139,7 @@ class _ActivityList extends State<ActivityList>
 
     listViews.add(
       WaterView(
+        UserID: widget.userID,
         mainScreenAnimation: Tween<double>(begin: 0.0, end: 1.0).animate(
             CurvedAnimation(
                 parent: widget.animationController!,
